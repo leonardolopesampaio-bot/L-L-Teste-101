@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Romântico</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fbe8e8; /* Cor suave romântica */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #content {
+            text-align: center;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ff9f9f; /* Cor suave de botão */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff6b6b;
+        }
+        #photos {
+            display: none;
+            margin-top: 20px;
+        }
+        .photo {
+            display: none;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="content">
+    <button onclick="startApp()">Clique para Iniciar</button>
+    <div id="photos">
+        <img class="photo" src="foto1.jpg" alt="Foto 1">
+        <img class="photo" src="foto2.jpg" alt="Foto 2">
+        <img class="photo" src="foto3.jpg" alt="Foto 3">
+        <img class="photo" src="foto4.jpg" alt="Foto 4">
+        <img class="photo" src="foto5.jpg" alt="Foto 5">
+        <img class="photo" src="foto6.jpg" alt="Foto 6">
+    </div>
+    <audio id="audio" src="musica.mp3"></audio>
+</div>
+
+<script>
+    function startApp() {
+        // Toca a música a partir do segundo 23
+        var audio = document.getElementById("audio");
+        audio.currentTime = 23;
+        audio.play();
+
+        // Exibe as fotos e começa a transição
+        var photos = document.querySelectorAll(".photo");
+        var currentPhotoIndex = 0;
+
+        document.getElementById("photos").style.display = "block";
+
+        function showNextPhoto() {
+            // Esconde a foto atual
+            if (currentPhotoIndex > 0) {
+                photos[currentPhotoIndex - 1].style.display = "none";
+            }
+
+            // Exibe a próxima foto com uma transição suave
+            photos[currentPhotoIndex].style.display = "block";
+            photos[currentPhotoIndex].style.opacity = 0;
+            photos[currentPhotoIndex].style.transition = "opacity 2s";
+            setTimeout(function() {
+                photos[currentPhotoIndex].style.opacity = 1;
+            }, 50);
+
+            // Passa para a próxima foto
+            currentPhotoIndex++;
+
+            // Quando as fotos terminarem, parar
+            if (currentPhotoIndex < photos.length) {
+                setTimeout(showNextPhoto, 5000); // Transição entre fotos a cada 5 segundos
+            }
+        }
+
+        // Começa a mostrar as fotos
+        showNextPhoto();
+    }
+</script>
+
+</body>
+</html>

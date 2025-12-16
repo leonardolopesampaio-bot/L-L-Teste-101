@@ -30,11 +30,11 @@
             background-color: #ff6b6b;
         }
         #photos {
-            display: none;
+            display: none; /* As fotos começam escondidas */
             margin-top: 20px;
         }
         .photo {
-            display: none;
+            display: none; /* As fotos começam invisíveis */
             width: 100%;
             max-width: 500px;
             margin: 0 auto;
@@ -74,10 +74,11 @@
         var photos = document.querySelectorAll(".photo");
         var currentPhotoIndex = 0;
 
+        // Torna as fotos visíveis ao começar
         document.getElementById("photos").style.display = "block";
 
         function showNextPhoto() {
-            // Esconde a foto atual
+            // Esconde a foto anterior (se não for a primeira)
             if (currentPhotoIndex > 0) {
                 photos[currentPhotoIndex - 1].style.display = "none";
             }
@@ -106,3 +107,4 @@
 
 </body>
 </html>
+
